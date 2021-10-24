@@ -88,6 +88,8 @@ runs:
       run: bash ${{ github.action_path }}/scripts/build_and_push.sh
       shell: bash
       env:
+        BUILDX_NAME: ${{ steps.buildx.outputs.name }}
+        BUILDX_ENDPOINT: ${{ steps.buildx.outputs.endpoint }}
         DOCKERFILE_LOCATION: ${{ inputs.dockerfile }}
         DOCKER_CONTEXT: ${{ inputs.docker_context }}
         PYTHON_VERSION: ${{ inputs.python_version }}
