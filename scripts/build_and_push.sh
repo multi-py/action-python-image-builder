@@ -66,12 +66,12 @@ echo "Beginning build."
 echo docker buildx build \
   --platform $PLATFORM \
   $TAGS \
-  --build-arg python_version=$PYTHON_VERSION \
-  --build-arg publish_target=$PUBLISH_TARGET \
-  --build-arg build_target=$BUILD_TARGET \
-  --build-arg packages=$PACKAGE \
-  --build-arg package_version=$PACKAGE_VERSION \
-  --build-arg maintainer=$MAINTAINER \
+  --build-arg "python_version=$PYTHON_VERSION" \
+  --build-arg "publish_target=$PUBLISH_TARGET" \
+  --build-arg "build_target=$BUILD_TARGET" \
+  --build-arg "packages=$PACKAGE" \
+  --build-arg "package_version=$PACKAGE_VERSION" \
+  --build-arg "maintainer=$MAINTAINER" \
   -f ${DOCKERFILE_LOCATION:-./dockerfile} \
   --push \
   ${DOCKER_BUILD_PATH:-.}
@@ -80,12 +80,12 @@ echo docker buildx build \
 docker buildx build \
   --platform $PLATFORM \
   $TAGS \
-  --build-arg python_version=$PYTHON_VERSION \
-  --build-arg publish_target=$PUBLISH_TARGET \
-  --build-arg build_target=$BUILD_TARGET \
-  --build-arg packages=$PACKAGE \
-  --build-arg package_version=$PACKAGE_VERSION \
-  --build-arg maintainer=$MAINTAINER \
+  --build-arg "python_version=$PYTHON_VERSION" \
+  --build-arg "publish_target=$PUBLISH_TARGET" \
+  --build-arg "build_target=$BUILD_TARGET" \
+  --build-arg "packages=$PACKAGE" \
+  --build-arg "package_version=$PACKAGE_VERSION" \
+  --build-arg "maintainer=$MAINTAINER" \
   -f ${DOCKERFILE_LOCATION:-./dockerfile} \
   --push \
   ${DOCKER_BUILD_PATH:-.}
