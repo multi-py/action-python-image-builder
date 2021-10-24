@@ -75,7 +75,7 @@ echo docker buildx build \
   --build-arg "python_version=$PYTHON_VERSION" \
   --build-arg "publish_target=$PUBLISH_TARGET" \
   --build-arg "build_target=$BUILD_TARGET" \
-  --build-arg "packages=$PACKAGE" \
+  --build-arg "package=$PACKAGE" \
   --build-arg "package_version=$PACKAGE_VERSION" \
   --build-arg "maintainer=$MAINTAINER" \
   -f ${DOCKERFILE_LOCATION:-./dockerfile} \
@@ -89,7 +89,7 @@ docker buildx build \
   --build-arg "python_version=$PYTHON_VERSION" \
   --build-arg "publish_target=$PUBLISH_TARGET" \
   --build-arg "build_target=$BUILD_TARGET" \
-  --build-arg "packages=$PACKAGE" \
+  --build-arg "package=$PACKAGE" \
   --build-arg "package_version=$PACKAGE_VERSION" \
   --build-arg "maintainer=$MAINTAINER" \
   -f ${DOCKERFILE_LOCATION:-./dockerfile} \
