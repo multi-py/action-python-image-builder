@@ -43,7 +43,7 @@ inputs:
   dockerfile:
     description: "The path to the dockerfile to use while building."
     required: true
-    default: "${{ github.action_path }}/dockerfile"
+    default: ""
 
   docker_build_path:
     description: "The path to build the image from."

@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -e
 
+SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+
 if [[ -z $PYTHON_VERSION ]]; then
   echo "Must set a python version to build."
   exit 1
@@ -36,6 +38,10 @@ if [[ $PUBLISH_TARGET =~ "alpine" ]]; then
 else
   # Every other image should use the full container for builds.
   BUILD_TARGET=$PYTHON_VERSION
+fi
+
+if [[ -z $DOCKERFILE_LOCATION ]]; then
+  DOCKERFILE_LOCATION=$SCRIPT_DIR/../dockerfile
 fi
 
 
