@@ -57,9 +57,11 @@ echo Python Version: $PYTHON_VERSION
 echo Publish Target: $PUBLISH_TARGET
 echo Build Target: $BUILD_TARGET
 
-# Create or Reuse builder builder
-docker buildx use multiarch ||  docker buildx create --name multiarch --use
+echo "Creating buildx builder."
+# Create or Reuse buildx builder
+docker buildx use multiarch || docker buildx create --name multiarch --use
 
+echo "Beginning build."
 # Display docker command for debugging
 echo docker buildx build \
   --platform $PLATFORM \
