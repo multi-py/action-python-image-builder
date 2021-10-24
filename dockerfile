@@ -10,7 +10,7 @@ ARG package
 ARG package_version
 
 # Only add build tools for alpine image. The ubuntu based images have build tools already.
-RUN if [[ "$build_target" == *"alpine" ]] ; then apk add build-base ; fi
+RUN /bin/bash -c "if [[ $build_target == \*\"alpine\" ]] ; then apk add build-base ; fi"
 
 # Install packaer and build all dependencies.
 RUN pip install $package==$package_version
