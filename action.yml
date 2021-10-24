@@ -45,8 +45,8 @@ inputs:
     required: true
     default: "${{ github.action_path }}/dockerfile"
 
-  docker_context:
-    description: "The context for building the image."
+  docker_build_path:
+    description: "The path to build the image from."
     required: true
     default: "."
 
@@ -91,7 +91,7 @@ runs:
         BUILDX_NAME: ${{ steps.buildx.outputs.name }}
         BUILDX_ENDPOINT: ${{ steps.buildx.outputs.endpoint }}
         DOCKERFILE_LOCATION: ${{ inputs.dockerfile }}
-        DOCKER_CONTEXT: ${{ inputs.docker_context }}
+        DOCKER_BUILD_PATH: ${{ inputs.docker_build_path }}
         PYTHON_VERSION: ${{ inputs.python_version }}
         TARGET_BASE: ${{ inputs.target_base }}
         PACKAGE_LIST: ${{ inputs.package_list }}

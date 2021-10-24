@@ -74,7 +74,7 @@ echo docker buildx build \
   --build-arg maintainer=$MAINTAINER \
   -f ${DOCKERFILE_LOCATION:-./dockerfile} \
   --push \
-  ${DOCKER_CONTEXT:-.}
+  ${DOCKER_BUILD_PATH:-.}
 
 
 docker buildx build \
@@ -88,4 +88,4 @@ docker buildx build \
   --build-arg maintainer=$MAINTAINER \
   -f ${DOCKERFILE_LOCATION:-./dockerfile} \
   --push \
-  ${DOCKER_CONTEXT:-.}
+  ${DOCKER_BUILD_PATH:-.}
