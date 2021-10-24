@@ -48,7 +48,7 @@ inputs:
   docker_context:
     description: "The context for building the image."
     required: true
-    default: "${{ github.workspace }}/"
+    default: "${{ github.action_path }}"
 
   registry:
     description: "The registry to store the image in."
