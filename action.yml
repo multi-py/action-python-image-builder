@@ -1,0 +1,100 @@
+name: 'Multi-Py Image Builder'
+description: 'Build multiarchitecture builds of your favorite Python libraries.'
+
+inputs:
+
+  python_version:
+    description: 'The Python version for this container.'
+    required: true
+    default: '3.10'
+
+  target_base:
+    description: 'The target version (slim, alpine, or full)'
+    required: true
+    default: 'full'
+
+  package:
+    description: 'The primary python package for the container.'
+    required: true
+
+  package_version:
+    description: 'The version to use in this container.'
+    required: true
+
+  package_latest_version:
+    description: 'The latest version of the package. When this matches `package_version` extra tags are added.'
+    required: false
+
+  image_name:
+    description: 'The name of the image (without the registry or tag).'
+    required: true
+    default: ${{ github.repository }}
+
+  platform:
+    description: 'The platform string to pass to buildx.'
+    required: true
+    default: "linux/amd64,linux/arm64,linux/arm/v7"
+
+  maintainer:
+    description: 'The maintainer, in `Name <email>` format.'
+    required: true
+    default: ${{ github.repository_owner }}
+
+  dockerfile:
+    description: "The path to the dockerfile to use while building."
+    required: true
+    default: "${{ github.action_path }}/dockerfile"
+
+  docker_context:
+    description: "The context for building the image."
+    required: true
+    default: "${{ github.workspace }}/"
+
+  registry:
+    description: "The registry to store the image in."
+    required: true
+    default: "ghcr.io"
+
+  registry_username:
+    description: "The username for logging into the registry. For the Github registry the repository owner is typically the username."
+    required: true
+    default: ${{ github.repository_owner }}
+
+  registry_password:
+    description: "The password for logging into the registry. For the Github registry the repository owner is typically `secret.GITHUB_TOKEN`."
+    required: true
+
+
+
+runs:
+  using: "composite"
+  steps:
+
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v1
+
+    - name: Set up Docker Buildx
+      id: buildx
+      uses: docker/setup-buildx-action@v1
+
+    - name: Log in to the Container registry
+      uses: docker/login-action@v1
+      with:
+        registry: ${{ inputs.registry }}
+        username: ${{ inputs.registry_username }}
+        password: ${{ inputs.registry_password }}
+
+    - name: Deploy Image
+      run: bash ${{ github.action_path }}/scripts/build_and_push.sh
+      shell: bash
+      env:
+        DOCKERFILE_LOCATION: ${{ inputs.dockerfile }}
+        DOCKER_CONTEXT: ${{ inputs.docker_context }}
+        PYTHON_VERSION: ${{ inputs.python_version }}
+        TARGET_BASE: ${{ inputs.target_base }}
+        PACKAGE_LIST: ${{ inputs.package_list }}
+        PLATFORM: ${{ inputs.platform }}
+        PACKAGE: ${{ inputs.package }}
+        PACKAGE_VERSION: ${{ inputs.package_version }}
+        PACKAGE_LATEST_VERSION: ${{ inputs.package_latest_version }}
+        MAINTAINER: ${{ inputs.maintainer }}
