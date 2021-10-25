@@ -10,6 +10,7 @@ ARG package
 ARG package_version
 
 # Only add build tools for alpine image. The ubuntu based images have build tools already.
+# This command fails with a warning on Ubuntu (sh) and succeeds without issue on alpine (bash).
 RUN if [[ "$build_target" == *"alpine" ]] ; then apk add build-base ; fi
 
 # Install packaer and build all dependencies.
